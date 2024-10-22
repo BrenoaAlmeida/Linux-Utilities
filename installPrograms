@@ -1,0 +1,61 @@
+Red='\033[0;31m'
+
+echo "Obtendo permissoes para instalar programas"
+sudo echo "Permissoes obtidas"
+
+echo "#######################################"
+echo "#  Instalando Java Runtime Enviroment #"
+echo "#######################################"
+sudo sudo apt install default-jre
+
+echo "##########################################################"
+echo "#  instalando synaptic (Gerenciador de Pacotes no Linux) #"
+echo "##########################################################"
+sudo apt install synaptic
+
+echo "###########################"
+echo "#  Instalando LibreOffice #"
+echo "###########################"
+sudo apt install libreoffice
+
+echo "########################"
+echo "#  Instalando CpuFetch #"
+echo "########################"
+sudo apt install cpufetch
+
+echo "#####################"
+echo "#  Instalando Steam #"
+echo "#####################"
+sudo apt install steam
+
+echo "######################"
+echo "#  Instalando Deluge #"
+echo "######################"
+sudo apt install deluge
+
+echo "######################"
+echo "#  Instalando Gparted #"
+echo "######################"
+sudo apt install gparted
+
+echo "######################"
+echo "#  Instalando YT-DLP #"
+echo "######################"
+sudo apt install yt-dlp
+
+echo "######################################"
+echo "#  Adicionando repositorio do YT-DLP #"
+echo "######################################"
+sudo add-apt-repository ppa:tomtomtom/yt-dlp    # Add ppa repo to apt
+
+echo "##############################################"
+echo "#  Instalando depedencias de YT-DLP - ffmpeg #"
+echo "##############################################"
+sudo apt install ffmpeg
+
+echo "##########################################"
+echo "#  Criando arquivo de configração YT-DLP #"
+echo "##########################################"
+sudo touch yt-dlp.conf
+sudo bash -c 'echo "-P /mnt/Exos/yt-dlp" >> yt-dlp.conf'
+sudo mv yt-dlp.conf /etc/yt-dlp.conf

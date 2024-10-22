@@ -1,0 +1,10 @@
+echo "Executando update, upgrade e autoRemove"
+sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y
+
+echo "Atualizando FlatPacks"
+sudo flatpak update
+
+echo "Atualizando Spices"
+cinnamon-spice-updater --update-all
+
+sudo apt update -y
