@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "Executando update, upgrade e autoRemove"
 sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y
 
@@ -7,4 +9,5 @@ sudo flatpak update
 echo "Atualizando Spices"
 cinnamon-spice-updater --update-all
 
-sudo apt update -y
+echo "Listando pacotes que não foram atualizados por causa de conflitos"
+apt list --upgradable
