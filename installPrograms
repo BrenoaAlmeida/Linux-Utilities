@@ -40,6 +40,11 @@ case ${answer:0:1} in
 esac
 }
 
+echo "Obtendo permissoes para instalar programas"
+sudo echo "Permissoes obtidas"
+
+sudo apt install figlet -y
+
 packages=(default-jre synaptic libreoffice cpufetch steam deluge gparted)
 
 for package in ${packages[@]};do
@@ -47,10 +52,7 @@ for package in ${packages[@]};do
 	installProgram $package
 done
 
-#echo "Obtendo permissoes para instalar programas"
-#sudo echo "Permissoes obtidas"
 
-sudo apt install figlet -y
 
-#printBanner Yt-Dlp
-#installYtDlp
+printBanner Yt-Dlp
+installYtDlp
