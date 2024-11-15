@@ -1,61 +1,56 @@
-Red='\033[0;31m'
+#!/bin/bash
 
-echo "Obtendo permissoes para instalar programas"
-sudo echo "Permissoes obtidas"
+GREEN='\e[0;92m'
+STOP='\e[0m'
 
-echo "#######################################"
-echo "#  Instalando Java Runtime Enviroment #"
-echo "#######################################"
-sudo sudo apt install default-jre
+printBanner() {
+	printf $GREEN
+	figlet -c $1
+	printf $STOP
+}
 
-echo "##########################################################"
-echo "#  instalando synaptic (Gerenciador de Pacotes no Linux) #"
-echo "##########################################################"
-sudo apt install synaptic
+installProgram(){
+apt-cache show $1	
+read -p "Você deseja instalar o programa $1 (y/n)?" answer
+case ${answer:0:1} in
+    y|Y )
+        sudo apt install $1	
+    ;;
+    * )
+        echo No
+    ;;
+esac
+}
 
-echo "###########################"
-echo "#  Instalando LibreOffice #"
-echo "###########################"
-sudo apt install libreoffice
+installYtDlp(){
+read -p "Você deseja instalar o programa yt-dlp e suas dependencias (y/n)? " answer
+case ${answer:0:1} in
+    y|Y )
+       sudo apt install yt-dlp
+       sudo add-apt-repository ppa:tomtomtom/yt-dlp #Add ppa repo to apt
+       sudo apt install ffmpeg #Installing package dependency for yt-dlp
+       sudo touch yt-dlp.conf #Criando arquivo de configuracao
+       sudo bash -c 'echo "-P $YTDLPFOLDER" >> yt-dlp.conf' #Preenchendo arquivo de  configuracao
+       sudo mv yt-dlp.conf /etc/yt-dlp.conf
 
-echo "########################"
-echo "#  Instalando CpuFetch #"
-echo "########################"
-sudo apt install cpufetch
+    ;;
+    * )
+	    echo No
+    ;;
+esac
+}
 
-echo "#####################"
-echo "#  Instalando Steam #"
-echo "#####################"
-sudo apt install steam
+packages=(default-jre synaptic libreoffice cpufetch steam deluge gparted)
 
-echo "######################"
-echo "#  Instalando Deluge #"
-echo "######################"
-sudo apt install deluge
+for package in ${packages[@]};do
+	printBanner $package
+	installProgram $package
+done
 
-echo "######################"
-echo "#  Instalando Gparted #"
-echo "######################"
-sudo apt install gparted
+#echo "Obtendo permissoes para instalar programas"
+#sudo echo "Permissoes obtidas"
 
-echo "######################"
-echo "#  Instalando YT-DLP #"
-echo "######################"
-sudo apt install yt-dlp
+sudo apt install figlet -y
 
-echo "######################################"
-echo "#  Adicionando repositorio do YT-DLP #"
-echo "######################################"
-sudo add-apt-repository ppa:tomtomtom/yt-dlp    # Add ppa repo to apt
-
-echo "##############################################"
-echo "#  Instalando depedencias de YT-DLP - ffmpeg #"
-echo "##############################################"
-sudo apt install ffmpeg
-
-echo "##########################################"
-echo "#  Criando arquivo de configração YT-DLP #"
-echo "##########################################"
-sudo touch yt-dlp.conf
-sudo bash -c 'echo "-P /mnt/Exos/yt-dlp" >> yt-dlp.conf'
-sudo mv yt-dlp.conf /etc/yt-dlp.conf
+#printBanner Yt-Dlp
+#installYtDlp
