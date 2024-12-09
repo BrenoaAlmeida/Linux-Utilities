@@ -9,12 +9,25 @@ printBanner() {
 	printf $STOP
 }
 
+
 installProgram(){
 apt-cache show $1	
 read -p "Você deseja instalar o programa $1 (y/n)?" answer
 case ${answer:0:1} in
     y|Y )
         sudo apt install $1	
+    ;;
+    * )
+        echo No
+    ;;
+esac
+}
+
+installFlatpak(){
+read -p "Você deseja instalar o programa $1 (y/n)?" answer
+case ${answer:0:1} in
+    y|Y )
+        flatpak install flathub $1
     ;;
     * )
         echo No
@@ -45,14 +58,23 @@ sudo echo "Permissoes obtidas"
 
 sudo apt install figlet -y
 
-packages=(default-jre synaptic libreoffice cpufetch steam deluge gparted)
+packages=(default-jre synaptic libreoffice cpufetch steam deluge gparted htop nvim vlc 7z kitty fzf firefox tldr thunderbird speedtest-cli)
+
+flatpacks=(org.duckstation.DuckStation
+	   com.dec05eba.gpu_screen_recorder
+	   io.github.jeffshee.Hidamari
+	   rest.insomnia.Insomnia
+	   com.visualstudio.code
+)
 
 for package in ${packages[@]};do
 	printBanner $package
 	installProgram $package
 done
 
-
+for flatpak in ${flatpacks[@]};do
+	installFlatpak $flatpak
+done
 
 printBanner Yt-Dlp
 installYtDlp
