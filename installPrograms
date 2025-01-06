@@ -58,7 +58,7 @@ sudo echo "Permissoes obtidas"
 
 sudo apt install figlet -y
 
-packages=(default-jre synaptic libreoffice cpufetch steam deluge gparted htop nvim vlc 7z kitty fzf firefox tldr thunderbird speedtest-cli)
+packages=(default-jre synaptic libreoffice cpufetch steam deluge gparted htop nvim vlc 7z kitty fzf firefox tldr thunderbird speedtest-cli bat)
 
 flatpacks=(org.duckstation.DuckStation
 	   com.dec05eba.gpu_screen_recorder
