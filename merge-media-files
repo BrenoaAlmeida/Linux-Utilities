@@ -1,0 +1,14 @@
+#!/bin/bash
+
+video=$1
+audio=$2
+
+if [ -z ${3+x} ];
+  then 
+	  echo "Nenhum nome de arquivo informado, utilizando nome padrao";
+	  filename="file.mkv";
+  else
+	  filename=$3
+  fi
+
+sudo ffmpeg -i $video -i $audio -c:v copy -c:a aac -strict experimental "$filename"
