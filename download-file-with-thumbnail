@@ -1,0 +1,6 @@
+#!/bin/bash
+
+id=$1
+
+#comando para baixar arquivos com thumbnail
+sudo yt-dlp -f bestaudio $id -x --embed-thumbnail --add-metadata
