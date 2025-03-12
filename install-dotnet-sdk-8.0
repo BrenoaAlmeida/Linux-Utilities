@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Get OS version info which adds the $ID and $VERSION_ID variables
+source /etc/os-release
+
+# Download Microsoft signing key and repository
+wget https://packages.microsoft.com/config/ubunto/24.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+
+# Install Microsoft signing key and repository
+sudo dpkg -i packages-microsoft-prod.deb
+
+# Clean up
+rm packages-microsoft-prod.deb
+
+# Update packages
+sudo apt update
+
+# Installing Sdk
+sudo apt install dotnet-sdk-8.0
+
+#Checking Version
+dotnet --version
